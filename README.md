@@ -77,7 +77,7 @@ safe-anything --list-rules
 
 ## What it finds
 
-69 rules, each with a CWE id, an OWASP category and a link to the OWASP page that explains it.
+72 rules, each with a CWE id, an OWASP category and a link to the OWASP page that explains it.
 The full list is in [docs/rules.md](docs/rules.md).
 
 | | |
