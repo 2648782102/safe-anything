@@ -7,7 +7,7 @@ license = "MIT"
 repository = "https://github.com/erkamyaman/safe-anything"
 keywords = ["security", "scanner", "sast", "mcp", "vulnerability"]
 categories = ["command-line-utilities", "development-tools"]
-rust-version = "1.85"
+rust-version = "1.88"
 
 [dependencies]
 clap = { version = "4", features = ["derive"] }

@@ -156,10 +156,10 @@ fn toml_packages(file: &FileInfo, text: &str, eco: &str, need_source: bool) -> V
                 }
                 j += 1;
             }
-            if let (Some(n), Some(v)) = (name, version) {
-                if source || !need_source {
-                    out.push(pkg(eco, &n, &v, file, vline));
-                }
+            if let (Some(n), Some(v)) = (name, version)
+                && (source || !need_source)
+            {
+                out.push(pkg(eco, &n, &v, file, vline));
             }
             i = j;
         } else {
@@ -209,11 +209,13 @@ fn gemfile_lock(file: &FileInfo, text: &str) -> Vec<Package> {
             in_specs = false;
             continue;
         }
-        if in_specs && line.starts_with("    ") && !line.starts_with("     ") {
-            if let Some((name, rest)) = line.trim().split_once(" (") {
-                let v = rest.trim_end_matches(')').split('-').next().unwrap_or("");
-                out.push(pkg("RubyGems", name, v, file, i + 1));
-            }
+        if in_specs
+            && line.starts_with("    ")
+            && !line.starts_with("     ")
+            && let Some((name, rest)) = line.trim().split_once(" (")
+        {
+            let v = rest.trim_end_matches(')').split('-').next().unwrap_or("");
+            out.push(pkg("RubyGems", name, v, file, i + 1));
         }
     }
     out

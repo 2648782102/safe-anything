@@ -230,12 +230,12 @@ fn check_server(
         .get("url")
         .or_else(|| server.get("serverUrl"))
         .and_then(Value::as_str)
+        && let Some(rest) = url.strip_prefix("http://")
     {
-        if let Some(rest) = url.strip_prefix("http://") {
-            let host = rest.split(['/', ':']).next().unwrap_or("");
-            if !matches!(host, "localhost" | "127.0.0.1" | "[") && !host.starts_with("[::1") {
-                let line = line_after(text, start, url);
-                out.push(finding(
+        let host = rest.split(['/', ':']).next().unwrap_or("");
+        if !matches!(host, "localhost" | "127.0.0.1" | "[") && !host.starts_with("[::1") {
+            let line = line_after(text, start, url);
+            out.push(finding(
             file,
             text,
             line,
@@ -248,7 +248,6 @@ fn check_server(
                 secret: None,
             },
         ));
-            }
         }
     }
 }
