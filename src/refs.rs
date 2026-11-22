@@ -131,6 +131,16 @@ pub fn of(id: &str) -> Refs {
                 "Secrets_Management_Cheat_Sheet"
             )
         }
+        "secret.public-env-secret" => r!(
+            "CWE-200",
+            "A05:2021 Security Misconfiguration",
+            "Secrets_Management_Cheat_Sheet"
+        ),
+        "secret.env-not-ignored" => r!(
+            "CWE-538",
+            "A05:2021 Security Misconfiguration",
+            "Secrets_Management_Cheat_Sheet"
+        ),
         "secret.private-key" => r!(
             "CWE-321",
             "A02:2021 Cryptographic Failures",

@@ -50,6 +50,10 @@ pub fn rules() -> Vec<RuleInfo> {
                     RuleInfo::new(id, Family::Agent, severity, message)
                 }),
         )
+        .chain(std::iter::once({
+            let (id, severity, message) = rules::secrets::ENV_NOT_IGNORED;
+            RuleInfo::new(id, Family::Secret, severity, message)
+        }))
         .chain(std::iter::once(RuleInfo::new(
             "dependency.known-vulnerability",
             Family::Dependency,
@@ -204,7 +208,12 @@ pub fn scan(root: &Path, options: &Options) -> std::io::Result<Report> {
         ));
     }
     let started = std::time::Instant::now();
-    let scanned = engine::scan_files(root, options.include_tests);
+    let mut scanned = engine::scan_files(root, options.include_tests);
+    if root.is_dir() {
+        scanned
+            .findings
+            .extend(rules::secrets::env_not_ignored(root, &scanned.env_files));
+    }
     let mut report = Report {
         files_scanned: scanned.files,
         packages_checked: scanned.packages.len(),

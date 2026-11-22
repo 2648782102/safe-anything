@@ -21,7 +21,7 @@ Every rule safe-anything checks, generated from `safe-anything --list-rules --js
 | [`code.weak-hash`](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html) | low | [CWE-328](https://cwe.mitre.org/data/definitions/328.html) | A02:2021 Cryptographic Failures | MD5 and SHA-1 are broken for security use (collisions; too fast for passwords). |
 | [`code.weak-cipher`](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html) | medium | [CWE-327](https://cwe.mitre.org/data/definitions/327.html) | A02:2021 Cryptographic Failures | A weak cipher or ECB mode is used; ECB leaks patterns and DES/RC4 are broken. |
 | [`code.insecure-cookie`](https://cheatsheetseries.owasp.org/cheatsheets/Session_Management_Cheat_Sheet.html) | low | [CWE-614](https://cwe.mitre.org/data/definitions/614.html) | A05:2021 Security Misconfiguration | A cookie is set without HttpOnly or Secure, so scripts or plain HTTP can read it. |
-| [`code.jwt-none`](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_for_Java_Cheat_Sheet.html) | high | [CWE-347](https://cwe.mitre.org/data/definitions/347.html) | A07:2021 Identification and Authentication Failures | JWT signatures are not checked, so anyone can forge a token. |
+| [`code.jwt-none`](https://cheatsheetseries.owasp.org/cheatsheets/JSON_Web_Token_Cheat_Sheet.html) | high | [CWE-347](https://cwe.mitre.org/data/definitions/347.html) | A07:2021 Identification and Authentication Failures | JWT signatures are not checked, so anyone can forge a token. |
 | [`code.cors-wildcard`](https://cheatsheetseries.owasp.org/cheatsheets/HTML5_Security_Cheat_Sheet.html) | low | [CWE-942](https://cwe.mitre.org/data/definitions/942.html) | A05:2021 Security Misconfiguration | CORS allows every origin. Fine for public data; risky for anything behind a login. |
 | [`code.insecure-random`](https://cheatsheetseries.owasp.org/cheatsheets/Cryptographic_Storage_Cheat_Sheet.html) | medium | [CWE-338](https://cwe.mitre.org/data/definitions/338.html) | A02:2021 Cryptographic Failures | A secret value is made with a non-cryptographic random generator, which can be predicted. |
 | [`code.debug-enabled`](https://cheatsheetseries.owasp.org/cheatsheets/Error_Handling_Cheat_Sheet.html) | medium | [CWE-489](https://cwe.mitre.org/data/definitions/489.html) | A05:2021 Security Misconfiguration | The app runs in debug mode; the debugger can run code and leaks internals. |
@@ -31,7 +31,7 @@ Every rule safe-anything checks, generated from `safe-anything --list-rules --js
 | [`code.sql-grant-all`](https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html) | medium | [CWE-250](https://cwe.mitre.org/data/definitions/250.html) | A01:2021 Broken Access Control | A database user gets every privilege on every database. |
 | [`code.sql-plaintext-password`](https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html) | medium | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A database password is written in a SQL file. |
 
-## Secrets (11)
+## Secrets (14)
 
 | Rule | Severity | CWE | OWASP | What it means |
 | --- | --- | --- | --- | --- |
@@ -46,6 +46,9 @@ Every rule safe-anything checks, generated from `safe-anything --list-rules --js
 | [`secret.hardcoded-password`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | high | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A password or secret is written in the code. |
 | [`secret.url-credentials`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | high | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A connection string carries a username and password. |
 | [`secret.env-file`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | medium | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A .env file with values is in the repository; these usually hold real secrets. |
+| [`secret.env-example-value`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | high | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | An example env file holds what looks like a real secret value; example files are meant to be committed and shared. |
+| [`secret.public-env-secret`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | high | [CWE-200](https://cwe.mitre.org/data/definitions/200.html) | A05:2021 Security Misconfiguration | A secret is given a public env prefix, so the build ships it inside the client bundle where anyone can read it. |
+| [`secret.env-not-ignored`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | medium | [CWE-538](https://cwe.mitre.org/data/definitions/538.html) | A05:2021 Security Misconfiguration | The project has env files but .gitignore does not exclude .env, so real secrets are one git add away from the repository. |
 
 ## Agent setups (9)
 

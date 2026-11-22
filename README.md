@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/assets/logo.png" width="150" height="150" alt="The safe-anything shield">
+  <img src="docs/assets/logo.png" width="150" height="150" alt="The safe-anything tortoise">
 </p>
 
 <h1 align="center">safe-anything</h1>
@@ -19,7 +19,7 @@ and the AI agent setup that writes it all. Every finding comes with the line, th
   <a href="https://github.com/erkamyaman/safe-anything"><img src="https://img.shields.io/github/stars/erkamyaman/safe-anything?style=social" alt="GitHub stars"></a>
 </p>
 
-<p align="center"><b><a href="#quick-start">Install</a></b> · <a href="https://github.com/erkamyaman/safe-anything/releases">Releases</a> · <a href="#for-ai-agents">Claude Code plugin</a> · <a href="#in-ci">GitHub Action</a> · <a href="docs/rules.md">All 69 rules</a> · <a href="docs/agent-setups.md">Agent setups</a><br>
+<p align="center"><b><a href="#quick-start">Install</a></b> · <a href="https://github.com/erkamyaman/safe-anything/releases">Releases</a> · <a href="#for-ai-agents">Claude Code plugin</a> · <a href="#in-ci">GitHub Action</a> · <a href="docs/rules.md">All 72 rules</a> · <a href="docs/agent-setups.md">Agent setups</a><br>
 Made in Türkiye 🇹🇷 by <a href="https://github.com/erkamyaman">erKam Yaman</a>, who also made <a href="https://github.com/erkamyaman/rust-anything">rust-anything</a> · <a href="https://github.com/sponsors/erkamyaman">❤️ Sponsor me</a> · Sponsored by <a href="https://coderabbit.link/erkamyaman">CodeRabbit</a></p>
 
 <p align="center">
@@ -36,7 +36,7 @@ Made in Türkiye 🇹🇷 by <a href="https://github.com/erkamyaman">erKam Yaman
     </td>
     <td width="25%" valign="top">
       <b>Your secrets</b><br>
-      Cloud and AI keys, tokens, private keys, passwords and <code>.env</code> files in the repo. Always redacted in the output.
+      Cloud and AI keys, tokens, private keys, passwords, and <code>.env</code> mistakes: committed env files, real values in <code>.env.example</code>, secrets behind <code>NEXT_PUBLIC_</code> or <code>VITE_</code>. Always redacted in the output.
     </td>
     <td width="25%" valign="top">
       <b>Your stack</b><br>
@@ -83,7 +83,7 @@ The full list is in [docs/rules.md](docs/rules.md).
 | | |
 | --- | --- |
 | **Code** | SQL injection, command injection, XSS (`innerHTML`, `dangerouslySetInnerHTML`, `v-html`, `echo $_GET`, `raw`), `eval` and `new Function`, path traversal, SSRF, unsafe deserialization (pickle, `yaml.load`, `ObjectInputStream`, `BinaryFormatter`, `unserialize`, `Marshal`), TLS checks turned off, MD5/SHA-1, DES/RC4/ECB, JWT `none`, template injection, debug mode, insecure cookies, `Math.random` tokens. JS/TS, Python, Go, Java, Kotlin, PHP, Ruby, C#, SQL |
-| **Secrets** | AWS, GitHub, Slack, Stripe, OpenAI, Anthropic and Google keys, private keys, passwords in code, credentials in connection strings, committed `.env` files |
+| **Secrets** | AWS, GitHub, Slack, Stripe, OpenAI, Anthropic and Google keys, private keys, passwords in code, credentials in connection strings, committed `.env` files, real values in `.env.example`, a `.gitignore` that misses `.env`, secrets behind public prefixes (`NEXT_PUBLIC_`, `VITE_`, `EXPO_PUBLIC_`) that ship in the client bundle |
 | **Agent setups** | `bypassPermissions` and `--dangerously-skip-permissions`, pre-approved `Bash`, MCP servers run with unpinned `npx`/`uvx`/`docker`, MCP tokens in plain text, remote MCP over `http://`, `curl \| sh` in hooks and skills, prompt-injection text, skills that read `~/.ssh` or cloud credentials, invisible Unicode in instructions. [More](docs/agent-setups.md) |
 | **Mobile** | Android `debuggable`, cleartext traffic, exported content providers, WebView file access and JS bridges, world-readable files; iOS ATS turned off; tokens in UserDefaults, SharedPreferences, AsyncStorage or localStorage |
 | **Config** | Docker (unpinned base, root, secrets in `ENV`, `ADD <url>`), GitHub Actions (`pull_request_target`, `write-all`, actions on `@main`, script injection from PR titles), privileged containers, `hostNetwork`, open Terraform ingress, public buckets, nginx autoindex, TLS 1.0/1.1 |
@@ -154,7 +154,7 @@ formats. Nothing is executed. The only network call is the dependency check, whi
 names and versions to OSV.dev ([privacy](docs/privacy.md)).
 
 It finds known patterns; it does not trace data through your program. A clean scan means none of
-these 69 problems were found, not that the code is safe. [Design notes](docs/adr).
+these 72 problems were found, not that the code is safe. [Design notes](docs/adr).
 
 ## Credits
 

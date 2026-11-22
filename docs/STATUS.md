@@ -10,7 +10,7 @@ by this repository's tests (a fixture per family with safe look-alikes that must
 | Family | Status | Last real run | Result |
 | --- | --- | --- | --- |
 | Code | Verified | OWASP Juice Shop, DVWA, express, flask (2026-11-22) | finds the known SQL injections, command injections and `eval` in Juice Shop and DVWA; 0 findings in express; the noisiest rule is `code.xss-inner-html` |
-| Secrets | Verified | Juice Shop seeded users, rust-anything (2026-11-22) | seeded passwords found; placeholders (`xoxp-...`, `****`, `${VAR}`) ignored |
+| Secrets | Verified | Juice Shop seeded users, rust-anything, the 73 Next.js examples that ship env files, each scanned as its own project (2026-11-22) | seeded passwords found; placeholders (`xoxp-...`, `****`, `${VAR}`, `your-key-here`) ignored; in the Next.js examples the env checks flag one project, a password behind `NEXT_PUBLIC_` that ships to the browser, and nothing else |
 | Agent setups | Verified | anthropics/skills, vercel-labs/agent-skills, a real `~/.claude` (2026-11-22) | no false prompt-injection hits left on skills that warn against injection; MCP-config checks tested on fixtures only |
 | Mobile | Tested | none | Android manifest, network security config, WebView, iOS plist, storage on fixtures |
 | Config | Verified | Juice Shop Terraform and workflows, modelcontextprotocol/servers (2026-11-22) | open ingress, `pull_request_target`, unpinned actions found; build-stage `FROM` and action inputs no longer flagged |

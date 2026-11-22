@@ -8,7 +8,7 @@ pub mod agent;
 mod code;
 mod config;
 mod mobile;
-mod secrets;
+pub mod secrets;
 
 pub struct FileInfo {
     pub rel: String,
@@ -186,7 +186,9 @@ pub fn check(file: &FileInfo, src: &str, include_tests: bool) -> Vec<Finding> {
         }
         for caps in c.re.captures_iter(src) {
             let m = caps.get(0).expect("whole match");
-            let secret = (c.rule.family == Family::Secret).then(|| {
+            let secret = (c.rule.family == Family::Secret
+                && !secrets::NAME_ONLY.contains(&c.rule.id))
+            .then(|| {
                 caps.iter()
                     .skip(1)
                     .flatten()
@@ -206,10 +208,10 @@ pub fn check(file: &FileInfo, src: &str, include_tests: bool) -> Vec<Finding> {
             {
                 continue;
             }
-            if let Some(unless) = &c.unless {
-                if unless.is_match(text.line(line)) {
-                    continue;
-                }
+            if let Some(unless) = &c.unless
+                && unless.is_match(text.line(line))
+            {
+                continue;
             }
             if seen.insert((c.rule.id.to_string(), line)) {
                 out.push(finding(

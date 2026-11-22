@@ -27,6 +27,7 @@ pub struct Scanned {
     pub files: usize,
     pub findings: Vec<Finding>,
     pub packages: Vec<Package>,
+    pub env_files: Vec<String>,
 }
 
 pub fn scan_files(root: &Path, include_tests: bool) -> Scanned {
@@ -34,6 +35,7 @@ pub fn scan_files(root: &Path, include_tests: bool) -> Scanned {
         files: 0,
         findings: Vec::new(),
         packages: Vec::new(),
+        env_files: Vec::new(),
     });
     let single_file = root.is_file();
     let base = if single_file {
@@ -100,6 +102,9 @@ pub fn scan_files(root: &Path, include_tests: bool) -> Scanned {
                 out.files += 1;
                 out.findings.extend(findings);
                 out.packages.extend(packages);
+                if rules::secrets::is_env(&info.name) && !info.is_test() {
+                    out.env_files.push(rel.clone());
+                }
                 WalkState::Continue
             })
         });
