@@ -5,8 +5,9 @@
 <h1 align="center">safe-anything</h1>
 
 <p align="center"><b>Find the holes before someone else does.</b><br>
-One command checks your code, your secrets, your mobile and cloud config, your dependencies,<br>
-and the AI agent setup that writes it all. Every finding comes with the line, the reason and the fix.</p>
+One command finds XSS, SQL injection and other vulnerabilities in your code, leaked secrets,<br>
+risky mobile and cloud config, vulnerable dependencies, and the AI agent setup that writes it all.<br>
+Every finding comes with the line, the reason and the fix.</p>
 
 <p align="center">
   <img src="https://img.shields.io/github/languages/top/erkamyaman/safe-anything?logo=rust&label=Rust&color=CE422B" alt="Rust share of the code">
