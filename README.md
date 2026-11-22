@@ -90,6 +90,12 @@ The full list is in [docs/rules.md](docs/rules.md).
 | **Config** | Docker (unpinned base, root, secrets in `ENV`, `ADD <url>`), GitHub Actions (`pull_request_target`, `write-all`, actions on `@main`, script injection from PR titles), privileged containers, `hostNetwork`, open Terraform ingress, public buckets, nginx autoindex, TLS 1.0/1.1 |
 | **Dependencies** | every locked version in `package-lock.json`, `yarn.lock`, `pnpm-lock.yaml`, `Cargo.lock`, `requirements*.txt`, `poetry.lock`, `uv.lock`, `go.mod`, `Gemfile.lock` and `composer.lock`, checked against [OSV.dev](https://osv.dev), with the nearest fixed version |
 
+<p align="center">
+  <img src="docs/assets/nextjs-public-env.gif" alt="safe-anything on the with-mqtt-js example from the Next.js repository: 2 high findings, an MQTT password read from a NEXT_PUBLIC_ variable in app/page.tsx and environment.d.ts, which Next.js ships in the client bundle." width="820">
+  <br>
+  <sub>Of the 73 <a href="https://github.com/vercel/next.js/tree/canary/examples">Next.js examples</a> that come with env files, scanned one by one, the env checks flag one: a password behind <code>NEXT_PUBLIC_</code>.</sub>
+</p>
+
 ## For AI agents
 
 safe-anything is also an MCP server, so your agent can scan before it commits, and before you
@@ -113,7 +119,7 @@ Tools: `scan` (path, offline, severity, include_tests) and `list_rules`. The ski
 ## In CI
 
 ```yaml
-- uses: erkamyaman/safe-anything@v1.0.1
+- uses: erkamyaman/safe-anything@v1.0.2
   with:
     fail-on: high
 - uses: github/codeql-action/upload-sarif@v4
@@ -141,6 +147,12 @@ doing.
 | [vercel-labs/agent-skills](https://github.com/vercel-labs/agent-skills) | 439 | 0 | |
 | [rust-anything](https://github.com/erkamyaman/rust-anything) | 3,134 | 6 | `innerHTML` in GIF demo pages (5), an action on `@master` |
 | safe-anything itself | 53 | 0 | checked in CI on every push |
+
+<p align="center">
+  <img src="docs/assets/express-clean.gif" alt="safe-anything on expressjs/express: no problems found, 216 files scanned in 0.03 s." width="820">
+  <br>
+  <sub>Quiet on good code: expressjs/express, 216 files, no findings.</sub>
+</p>
 
 The noisiest rule is `code.xss-inner-html`: it fires on any HTML built from a variable, and most of
 those in local tooling are not reachable by an attacker. It stays on, because real XSS looks the

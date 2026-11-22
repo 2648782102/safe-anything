@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+## 1.0.2 (2026-11-23)
+
+- README: GIFs of a real Next.js finding (a password behind `NEXT_PUBLIC_`) and of a clean scan of express.
+
 ## 1.0.1 (2026-11-22)
 
 - README and package pages name XSS and SQL injection up front.
