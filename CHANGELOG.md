@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 1.0.1 (2026-11-22)
+
+- README and package pages name XSS and SQL injection up front.
+- Issue templates (false positive or missed finding, bug, new rule) and a pull request template.
+
 ## 1.0.0 (2026-11-22)
 
 - First release. One command scans a repository: `safe-anything .`
