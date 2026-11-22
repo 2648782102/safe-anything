@@ -1,3 +1,3 @@
-const password = 'hunter2hunter2';
+const password = '{{fake:password}}';
 localStorage.setItem('token', 'abc');
-const k = 'AKIAIOSFODNN7EXAMPLQ';
+const k = '{{fake:aws}}';

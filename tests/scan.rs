@@ -1,14 +1,13 @@
+mod common;
+
 use std::collections::BTreeSet;
-use std::path::Path;
 
 fn check(family: &str) {
     check_with(family, safe_anything::Options::offline(), None);
 }
 
 fn check_with(family: &str, options: safe_anything::Options, packages: Option<usize>) {
-    let root = Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("tests/fixtures")
-        .join(family);
+    let root = common::fixtures().join(family);
     let expected: BTreeSet<String> = std::fs::read_to_string(root.join("EXPECTED"))
         .unwrap()
         .lines()

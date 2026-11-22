@@ -1,3 +1,5 @@
+mod common;
+
 use std::path::Path;
 use std::process::Command;
 
@@ -14,11 +16,7 @@ fn run(args: &[&str]) -> (i32, String) {
 }
 
 fn fixture(name: &str) -> String {
-    Path::new(env!("CARGO_MANIFEST_DIR"))
-        .join("tests/fixtures")
-        .join(name)
-        .to_string_lossy()
-        .into_owned()
+    common::fixtures().join(name).to_string_lossy().into_owned()
 }
 
 #[test]
@@ -181,19 +179,21 @@ fn mcp_server_scans_over_stdio() {
 
 #[test]
 fn secrets_are_redacted_in_every_output() {
-    let token_tail = "Z9y8X7w6V5u4T3s2";
+    let token = common::fake("github");
+    let token_tail = &token[token.len() - 16..];
+    let password = common::fake("password");
+    let aws = common::fake("aws");
     for args in [
         vec![fixture("agent"), "--offline".into()],
         vec![fixture("agent"), "--offline".into(), "--json".into()],
         vec![fixture("secrets"), "--offline".into(), "--sarif".into()],
+        vec![fixture("secrets"), "--offline".into()],
     ] {
         let args: Vec<&str> = args.iter().map(String::as_str).collect();
         let (_, out) = run(&args);
         assert!(!out.contains(token_tail), "token leaked with {args:?}");
-        assert!(
-            !out.contains("hunter2hunter2"),
-            "password leaked with {args:?}"
-        );
+        assert!(!out.contains(&password), "password leaked with {args:?}");
+        assert!(!out.contains(&aws[4..]), "AWS key leaked with {args:?}");
     }
     let (_, out) = run(&[&fixture("agent"), "--offline"]);
     assert!(
