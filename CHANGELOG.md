@@ -1,0 +1,23 @@
+# Changelog
+
+## Unreleased
+
+## 0.1.0 (2026-11-22)
+
+- First release. One command scans a repository: `safe-anything .`
+- 69 rules in six families: code (SQL and command injection, XSS, eval, SSRF, path traversal,
+  unsafe deserialization, weak crypto, TLS checks off, JWT `none`, template injection, debug
+  mode), secrets (provider keys, private keys, passwords, credentials in URLs, `.env` files),
+  agent setups (skipped permissions, pre-approved shell, unpinned MCP servers, plaintext MCP
+  tokens, remote MCP over HTTP, `curl | sh` in hooks and skills, prompt-injection text, credential
+  file access, invisible Unicode), mobile (Android manifest, WebView, iOS ATS, tokens in plain
+  storage), config (Docker, GitHub Actions, Kubernetes, Terraform, nginx) and dependencies
+  (nine lockfile formats checked against OSV.dev, with the nearest fixed version).
+- Every finding has a file, a line, a severity, a CWE, an OWASP category, a fix and a link to
+  read more. Secrets are redacted in the output.
+- Terminal report, `--json`, and `--sarif` for GitHub code scanning; `--severity`, `--fail-on`,
+  `--offline`, `--include-tests`, `--list-rules`.
+- `safe-anything mcp` serves `scan` and `list_rules` to AI agents over MCP (stdio), with a Claude
+  Code plugin and an agent skill.
+- A GitHub Action that installs the release binary, scans, and writes SARIF.
+- `safe-anything:ignore` silences one line; `.safe-anything-ignore` skips paths.
