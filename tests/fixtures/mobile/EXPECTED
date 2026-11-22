@@ -1,0 +1,13 @@
+android/app/src/main/AndroidManifest.xml:2 mobile.android-debuggable
+android/app/src/main/AndroidManifest.xml:3 mobile.android-allow-backup
+android/app/src/main/AndroidManifest.xml:4 mobile.android-cleartext
+android/app/src/main/AndroidManifest.xml:8 mobile.android-exported-provider
+android/app/src/main/java/Web.java:2 mobile.webview-js-bridge
+android/app/src/main/java/Web.java:3 mobile.webview-file-access
+android/app/src/main/java/Web.java:4 mobile.world-readable
+android/app/src/main/res/xml/network_security_config.xml:2 mobile.android-cleartext
+ios/App/Auth.swift:1 mobile.insecure-storage
+ios/App/Info.plist:4 mobile.ios-ats-disabled
+lib/storage.dart:1 mobile.insecure-storage
+src/session.ts:1 mobile.insecure-storage
+src/session.ts:2 mobile.insecure-storage

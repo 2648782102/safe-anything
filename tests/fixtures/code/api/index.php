@@ -1,0 +1,11 @@
+$r = mysqli_query($db, "SELECT * FROM users WHERE id = " . $_GET["id"]);
+system("ping " . $_GET["host"]);
+include($_GET["page"]);
+$o = unserialize($_COOKIE["state"]);
+echo $_GET["name"];
+echo htmlspecialchars($_GET["name"]);
+eval($code);
+$query = "SELECT first_name FROM users WHERE user_id = '$id';";
+$cmd = shell_exec('ping -c 4 ' . $target);
+$q = "SELECT * FROM t WHERE id = ?";
+$insert = "UPDATE users SET password = '$pass_new' WHERE user = 1";

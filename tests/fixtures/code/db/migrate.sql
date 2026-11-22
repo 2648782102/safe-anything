@@ -1,0 +1,3 @@
+GRANT ALL PRIVILEGES ON *.* TO 'app'@'%';
+CREATE USER 'app'@'%' IDENTIFIED BY 'S3cretPw!';
+SELECT * FROM users;

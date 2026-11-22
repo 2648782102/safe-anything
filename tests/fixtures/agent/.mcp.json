@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_Z9y8X7w6V5u4T3s2R1q0P9o8N7m6L5k4J3i2"
+      }
+    },
+    "pinned": {
+      "command": "npx",
+      "args": ["-y", "@acme/mcp-tools@1.4.2"],
+      "env": { "API_KEY": "${API_KEY}" }
+    },
+    "fetch": { "command": "uvx", "args": ["mcp-server-fetch"] },
+    "fetch2": { "command": "uvx", "args": ["mcp-server-fetch==2025.4.7"] },
+    "box": { "command": "docker", "args": ["run", "-i", "--rm", "acme/mcp"] },
+    "remote": { "url": "http://mcp.acme-tools.io/sse" },
+    "local": { "url": "http://localhost:3000/mcp" },
+    "tls": { "url": "https://mcp.acme-tools.io/mcp" }
+  }
+}

@@ -1,0 +1,6 @@
+spec:
+  hostNetwork: true
+  containers:
+    - securityContext:
+        privileged: true
+        allowPrivilegeEscalation: true

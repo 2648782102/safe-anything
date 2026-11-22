@@ -1,0 +1,6 @@
+web/package-lock.json:7 dependency.known-vulnerability
+api/requirements.txt:3 dependency.known-vulnerability
+svc/go.mod:6 dependency.known-vulnerability
+rb/Gemfile.lock:4 dependency.known-vulnerability
+rs/Cargo.lock:5 dependency.known-vulnerability
+php/composer.lock:5 dependency.known-vulnerability
