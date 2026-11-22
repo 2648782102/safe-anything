@@ -8,7 +8,7 @@ inputs:
     description: Folder to scan
     default: "."
   version:
-    description: safe-anything version (a release tag such as v0.1.0, or latest)
+    description: safe-anything version (a release tag such as v1.0.0, or latest)
     default: latest
   severity:
     description: Lowest severity to report (low, medium, high, critical)

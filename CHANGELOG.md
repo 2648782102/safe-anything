@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-## 0.1.0 (2026-11-22)
+## 1.0.0 (2026-11-22)
 
 - First release. One command scans a repository: `safe-anything .`
 - 72 rules in six families: code (SQL and command injection, XSS, eval, SSRF, path traversal,

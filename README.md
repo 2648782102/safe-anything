@@ -112,7 +112,7 @@ Tools: `scan` (path, offline, severity, include_tests) and `list_rules`. The ski
 ## In CI
 
 ```yaml
-- uses: erkamyaman/safe-anything@v0.1.0
+- uses: erkamyaman/safe-anything@v1.0.0
   with:
     fail-on: high
 - uses: github/codeql-action/upload-sarif@v4
