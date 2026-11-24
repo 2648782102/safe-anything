@@ -37,6 +37,52 @@ fn secrets() {
 }
 
 #[test]
+fn secrets_without_gitignore() {
+    // Self-contained: the project is built in a temp dir so the test does not
+    // depend on a fixture folder that must exist alongside it.
+    let root =
+        std::env::temp_dir().join(format!("safe-anything-no-gitignore-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    std::fs::create_dir_all(&root).unwrap();
+    std::fs::write(root.join(".env"), "SETTING=example-value\n").unwrap();
+    let report = safe_anything::scan(&root, &safe_anything::Options::offline()).unwrap();
+    let finding = report
+        .findings
+        .iter()
+        .find(|f| f.rule == "secret.env-not-ignored")
+        .expect("expected an unignored .env finding");
+    let _ = std::fs::remove_dir_all(&root);
+    assert_eq!(finding.path, ".env");
+    assert_eq!(finding.line, 1);
+    assert!(
+        finding.snippet.is_empty(),
+        "secret leaked in snippet: {}",
+        finding.snippet
+    );
+    assert!(!format!("{finding:?}").contains("example-value"));
+}
+
+#[test]
+fn env_example_without_gitignore() {
+    let root = std::env::temp_dir().join(format!(
+        "safe-anything-example-no-gitignore-{}",
+        std::process::id()
+    ));
+    let _ = std::fs::remove_dir_all(&root);
+    std::fs::create_dir_all(&root).unwrap();
+    std::fs::write(root.join(".env.example"), "SETTING=\n").unwrap();
+    let report = safe_anything::scan(&root, &safe_anything::Options::offline()).unwrap();
+    let _ = std::fs::remove_dir_all(&root);
+    assert!(
+        !report
+            .findings
+            .iter()
+            .any(|f| f.rule == "secret.env-not-ignored"),
+        "a lone .env.example should not be reported"
+    );
+}
+
+#[test]
 fn code() {
     check("code");
 }

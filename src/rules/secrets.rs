@@ -16,25 +16,38 @@ pub fn is_env(name: &str) -> bool {
 }
 
 pub fn env_not_ignored(root: &Path, env_files: &[String]) -> Option<Finding> {
-    if env_files.is_empty() {
-        return None;
-    }
-    let src = std::fs::read_to_string(root.join(".gitignore")).ok()?;
-    let covered = src.lines().map(str::trim).any(|l| {
-        let l = l.trim_start_matches("**/").trim_start_matches('/');
-        l.starts_with(".env") || l.starts_with("*.env")
+    let first_env = env_files.iter().filter(|p| !is_env_template(p)).min()?;
+    // With no .gitignore nothing is ignored, so report at the env file itself.
+    let gitignore = std::fs::read_to_string(root.join(".gitignore")).ok();
+    let covered = gitignore.as_deref().is_some_and(|src| {
+        src.lines().map(str::trim).any(|l| {
+            let l = l.trim_start_matches("**/").trim_start_matches('/');
+            l.starts_with(".env") || l.starts_with("*.env")
+        })
     });
     if covered {
         return None;
     }
+    let has_gitignore = gitignore.is_some();
+    let (file, src) = match gitignore {
+        Some(src) => (".gitignore".to_string(), src),
+        None => (
+            first_env.clone(),
+            std::fs::read_to_string(root.join(first_env)).unwrap_or_default(),
+        ),
+    };
     let text = Text::new(&src);
     if text.suppressed(1) {
         return None;
     }
+    // `.env` contents are only needed to honor suppression directives; never
+    // copy the secret value into a diagnostic snippet.
+    let empty = Text::new("");
+    let finding_text = if has_gitignore { &text } else { &empty };
     let (id, severity, message) = ENV_NOT_IGNORED;
     Some(finding(
-        &FileInfo::new(".gitignore"),
-        &text,
+        &FileInfo::new(&file),
+        finding_text,
         1,
         Meta {
             id,
@@ -51,18 +64,18 @@ fn any_text(_: &FileInfo) -> bool {
     true
 }
 
+fn is_env_template(name: &str) -> bool {
+    ["example", "sample", "template", "dist", "defaults"]
+        .iter()
+        .any(|s| name.ends_with(s))
+}
+
 fn env_file(f: &FileInfo) -> bool {
-    is_env(&f.name)
-        && !["example", "sample", "template", "dist", "defaults"]
-            .iter()
-            .any(|s| f.name.ends_with(s))
+    is_env(&f.name) && !is_env_template(&f.name)
 }
 
 fn env_example(f: &FileInfo) -> bool {
-    is_env(&f.name)
-        && ["example", "sample", "template", "dist", "defaults"]
-            .iter()
-            .any(|s| f.name.ends_with(s))
+    is_env(&f.name) && is_env_template(&f.name)
 }
 
 const ENV_SECRET_LINE: &str = r#"(?m)^\s*(?:export\s+)?[A-Za-z0-9_]*(?i:secret|token|password|passwd|api_?key|private_?key|access_?key|auth|credential)[A-Za-z0-9_]*\s*=\s*["']?([A-Za-z0-9+/_.=!@#$%^&*\-]{16,})["']?\s*$"#;

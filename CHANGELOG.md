@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Secrets: `secret.env-not-ignored` is reported at the `.env` file when the project has no `.gitignore`
+  at all. Example files like `.env.example` alone no longer trigger it.
 - Secrets: `secret.env-file` and `secret.env-example-value` now catch base64 values ending in `=` padding and
   passwords with `!@#$%^&*`. A value that is only `*` characters or starts with `$` (a reference like
   `$POSTGRES_PASSWORD`) is skipped.
