@@ -34,6 +34,16 @@ pub fn fake(name: &str) -> String {
         "mailgun" => ["ke", "y-", &body(32, HEX)].concat(),
         "password" => ["hunter2", "hunter2"].concat(),
         "db-password" => ["S3cret", "Passw0rd"].concat(),
+        "base64-padded" => [&body(30, MIXED), "=="].concat(),
+        "symbol-secret" => [
+            &body(8, MIXED),
+            "!",
+            &body(4, LETTERS),
+            "#",
+            &body(4, HEX),
+            "%",
+        ]
+        .concat(),
         "random" => body(40, MIXED),
         "private-key" => [
             "-----BEGIN RSA ",
