@@ -233,6 +233,12 @@ pub static RULES: &[Rule] = &[
         "A DigitalOcean token is written in the file."
     ),
     secret!(
+        "secret.twilio-api-key",
+        Critical,
+        r"\bSK[0-9a-f]{32}\b",
+        "A Twilio API key is written in the file."
+    ),
+    secret!(
         "secret.private-key",
         Critical,
         // A PEM file has real line breaks. A JSON string (a Google

@@ -97,6 +97,7 @@ pub fn fake(name: &str) -> String {
         "pypi-token" => ["py", "pi-", "AgEIcHlw", "aS5vcmc", &body(70, MIXED)].concat(),
         "shopify-token" => ["sh", "pat_", &body(32, HEX)].concat(),
         "digitalocean-token" => ["do", "p_v1_", &body(64, HEX)].concat(),
+        "twilio" => ["S", "K", &body(32, HEX)].concat(),
         other => panic!("no fake value named {other}"),
     }
 }
