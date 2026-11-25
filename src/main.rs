@@ -22,6 +22,9 @@ struct Cli {
     /// Print the report as SARIF 2.1.0 (GitHub code scanning)
     #[arg(long)]
     sarif: bool,
+    /// Also write the report as SARIF 2.1.0 to this file, from the same scan
+    #[arg(long, value_name = "FILE")]
+    sarif_file: Option<PathBuf>,
     /// Skip the dependency check (no network)
     #[arg(long)]
     offline: bool,
@@ -42,7 +45,7 @@ struct Cli {
     baseline: Option<PathBuf>,
     /// Record the current findings in this file for --baseline and exit (rule, path and a hash of
     /// the line; no code or secrets)
-    #[arg(long, value_name = "FILE", conflicts_with_all = ["baseline", "json", "sarif"])]
+    #[arg(long, value_name = "FILE", conflicts_with_all = ["baseline", "json", "sarif", "sarif_file"])]
     write_baseline: Option<PathBuf>,
 }
 
@@ -250,15 +253,33 @@ fn main() -> ExitCode {
         let verb = if n == 1 { "is" } else { "are" };
         eprintln!("{} {verb} in the baseline and not shown.", findings(n));
     }
-    if cli.sarif {
+    let sarif = (cli.sarif || cli.sarif_file.is_some()).then(|| {
         let prefix = sarif_prefix(&cli.path);
-        for f in &mut report.findings {
-            f.path = format!("{prefix}{}", f.path);
+        let paths: Vec<String> = report
+            .findings
+            .iter_mut()
+            .map(|f| {
+                let path = format!("{prefix}{}", f.path);
+                std::mem::replace(&mut f.path, path)
+            })
+            .collect();
+        let out = serde_json::to_string_pretty(&safe_anything::sarif::render(&report)).unwrap();
+        for (f, path) in report.findings.iter_mut().zip(paths) {
+            f.path = path;
         }
-        println!(
-            "{}",
-            serde_json::to_string_pretty(&safe_anything::sarif::render(&report)).unwrap()
-        );
+        out
+    });
+    if let Some(path) = &cli.sarif_file
+        && let Some(sarif) = &sarif
+        && let Err(e) = std::fs::write(path, format!("{sarif}\n"))
+    {
+        eprintln!("error: can't write {}: {e}", path.display());
+        return ExitCode::from(2);
+    }
+    if cli.sarif
+        && let Some(sarif) = &sarif
+    {
+        println!("{sarif}");
     } else if cli.json {
         println!("{}", serde_json::to_string_pretty(&report).unwrap());
     } else {
