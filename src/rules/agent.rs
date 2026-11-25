@@ -67,6 +67,15 @@ pub static RULES: &[Rule] = &[
         "Use the default or an accept-edits mode and allow specific commands instead of skipping all approvals."
     ),
     rule!(
+        "agent.mcp-auto-approve",
+        High,
+        claude_settings,
+        r#""enableAllProjectMcpServers"\s*:\s*true\b"#,
+        None,
+        "Claude Code starts every MCP server in the project's .mcp.json without asking about each one, so a cloned repository's servers can run commands on this machine.",
+        "Remove it and approve project MCP servers one by one, or list the trusted ones in \"enabledMcpjsonServers\"."
+    ),
+    rule!(
         "agent.remote-script",
         High,
         is_agent_file,
