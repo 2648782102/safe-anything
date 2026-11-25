@@ -30,3 +30,5 @@ slack_docs = "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXX
 slack_webhook = "{{fake:slack-webhook}}"
 discord_short = "https://discord.com/api/webhooks/123/abc"
 discord_webhook = "{{fake:discord-webhook}}"
+sendgrid_docs = "SG.example"
+sendgrid = "{{fake:sendgrid-key}}"

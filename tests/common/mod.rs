@@ -93,6 +93,7 @@ pub fn fake(name: &str) -> String {
             &body(33, MIXED),
         ]
         .concat(),
+        "sendgrid-key" => ["S", "G.", &body(22, MIXED), ".", &body(43, MIXED)].concat(),
         other => panic!("no fake value named {other}"),
     }
 }
