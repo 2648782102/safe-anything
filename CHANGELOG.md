@@ -43,6 +43,8 @@
   `restrict_public_buckets = false` in an `aws_s3_bucket_public_access_block` or `aws_s3_account_public_access_block`.
 - Secrets: new rule `secret.groq-key` (critical) for Groq API keys (`gsk_` followed by 52 letters or digits).
 - Code: new rule `code.open-redirect` (medium) for redirects built straight from request input (`res.redirect(req.query.next)`, `redirect(request.args.get("next"))`); a redirect to a fixed path stays unflagged.
+- Config: new rules `config.tf-public-database` (high) for `publicly_accessible = true` and `config.tf-unencrypted-storage` (medium)
+  for `storage_encrypted = false` in Terraform files. `publicly_accessible = false`, `storage_encrypted = true` and commented-out lines stay unflagged.
 - Config: `config.remote-script` also checks GitHub Actions workflows, so a `run:` step (or a line in a
   `run: |` block) that pipes `curl` or `wget` into a shell is reported. `curl -o file URL`, a step `name:` and a
   commented-out line are not.

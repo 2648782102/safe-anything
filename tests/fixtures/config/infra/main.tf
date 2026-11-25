@@ -30,3 +30,12 @@ resource "aws_s3_access_point" "reports" {
     restrict_public_buckets = false
   }
 }
+resource "aws_db_instance" "d" {
+  publicly_accessible = true
+  storage_encrypted   = false
+}
+resource "aws_db_instance" "private" {
+  publicly_accessible = false
+  storage_encrypted   = true # was = false
+  # publicly_accessible = true
+}
