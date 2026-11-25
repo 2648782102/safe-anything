@@ -78,6 +78,9 @@
 - Agent: new rule `agent.mcp-auto-approve` (high) for `"enableAllProjectMcpServers": true` in
   `.claude/settings*.json`, which starts every MCP server in the project's `.mcp.json` without asking about
   each one.
+- CLI: `safe-anything:ignore` takes an optional list of rule ids (`// safe-anything:ignore code.weak-hash, code.eval`)
+  and then silences only those rules on that line and the next. An unknown id silences nothing. A bare marker
+  still silences every rule.
 - CLI: `--write-baseline <file>` records the current findings (rule, path and a SHA-256 of the line, no code or
   secrets), and `--baseline <file>` hides them, wherever the line moved to, and says how many it hid, so CI can
   fail only on new findings. The action has a `baseline` input for it.

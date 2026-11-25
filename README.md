@@ -83,7 +83,9 @@ safe-anything --list-rules
     `.zip`, `.mp4`, `.class`, ...), and any other file with a zero byte in its first 8 KB. A text file
     saved under one of those extensions is not scanned either.
   - `*.lock` files get the dependency check but no code rules
-- `safe-anything:ignore` in a comment silences that line (or the next one).
+- `safe-anything:ignore` in a comment silences that line (or the next one). Follow it with rule ids,
+  `// safe-anything:ignore code.weak-hash, code.eval`, to silence only those rules. An id that is no
+  rule (a typo) silences nothing, so the finding stays in the report.
 - In tests, specs and fixtures only real provider keys and private keys count, unless you pass
   `--include-tests`.
 
