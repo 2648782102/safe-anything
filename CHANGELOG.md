@@ -32,6 +32,7 @@
 - Secrets: new rule `secret.npm-token` (critical) for npm access tokens (`npm_` followed by 36 letters or digits).
 - Secrets: new rule `secret.mailgun-key` (critical) for Mailgun private API keys (`key-` followed by 32 lowercase hex characters).
 - Secrets: new rule `secret.telegram-bot-token` (high) for Telegram bot tokens (8 to 10 digits, a colon, then 35 letters, digits, `_` or `-`).
+- Secrets: new rule `secret.slack-webhook` (high) for Slack incoming webhook URLs (`hooks.slack.com/services/T…/B…/` and a 24-character token). The docs placeholder with `T00000000` or `XXXXXXXX` is skipped.
 - Config: new rule `config.tf-public-access-block` (medium) for `block_public_policy = false` or
   `restrict_public_buckets = false` in an `aws_s3_bucket_public_access_block` or `aws_s3_account_public_access_block`.
 - Secrets: new rule `secret.groq-key` (critical) for Groq API keys (`gsk_` followed by 52 letters or digits).
