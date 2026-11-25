@@ -94,6 +94,7 @@ pub fn fake(name: &str) -> String {
         ]
         .concat(),
         "sendgrid-key" => ["S", "G.", &body(22, MIXED), ".", &body(43, MIXED)].concat(),
+        "pypi-token" => ["py", "pi-", "AgEIcHlw", "aS5vcmc", &body(70, MIXED)].concat(),
         other => panic!("no fake value named {other}"),
     }
 }
