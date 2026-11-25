@@ -21,6 +21,9 @@ fn shell(f: &FileInfo) -> bool {
 fn workflow(f: &FileInfo) -> bool {
     f.under(".github/workflows/") && f.ext_in(&["yml", "yaml"])
 }
+fn shell_or_workflow(f: &FileInfo) -> bool {
+    shell(f) || workflow(f)
+}
 fn yaml(f: &FileInfo) -> bool {
     f.ext_in(&["yml", "yaml"])
 }
@@ -50,7 +53,7 @@ pub static RULES: &[Rule] = &[
     rule!(
         "config.remote-script",
         Medium,
-        shell,
+        shell_or_workflow,
         r"\b(?:curl|wget|iwr|Invoke-WebRequest)\b[^|\n]*?(?:https?://|\$\{?\w)[^|\n]*\|\s*(?:sudo\s+)?(?:sh|bash|zsh|python3?|iex)\b",
         None,
         "A script is downloaded and piped straight into a shell, with no pinning or checksum.",
@@ -199,6 +202,10 @@ static FROM: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"(?i)^\s*FROM\s+(?:--platform=\S+\s+)?(\S+)").unwrap());
 static YAML_KEY: LazyLock<Regex> =
     LazyLock::new(|| Regex::new(r"^\s*-?\s*([A-Za-z_][\w-]*)\s*:\s*\S").unwrap());
+// A YAML key needs a space or the line end after its colon, so `C:\Windows\...` in a `run: |`
+// block is a command, not a key.
+static STEP_KEY: LazyLock<Regex> =
+    LazyLock::new(|| Regex::new(r"^\s*-?\s*([A-Za-z_][\w-]*)\s*:(?:\s|$)").unwrap());
 // The whole `key = false`, not just the key, so `= true # was block_public_policy = false`
 // is judged by the part in the comment, which the walk then rejects.
 // The rule's own pattern (`key = false` that ends the value), found again on the line in `keep`.
@@ -375,6 +382,15 @@ pub fn keep(file: &FileInfo, text: &Text, f: &Finding, hcl: &mut HclWalk) -> boo
         "config.gha-script-injection" if workflow(file) => YAML_KEY
             .captures(text.line(f.line))
             .is_none_or(|c| &c[1] == "run" || &c[1] == "script"),
+        // In a workflow only a `run:` step (or a line of its block) runs; a step `name:` or a
+        // commented-out line doesn't.
+        "config.remote-script" if workflow(file) => {
+            let line = text.line(f.line);
+            !line.trim_start().starts_with('#')
+                && STEP_KEY
+                    .captures(line)
+                    .is_none_or(|c| &c[1] == "run" || &c[1] == "script")
+        }
         "config.tf-public-access-block" => {
             let line = text.line(f.line);
             let start = text.line_start(f.line);
