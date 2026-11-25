@@ -35,6 +35,8 @@
 - Code: `code.open-redirect` now also matches a status code first, so `res.redirect(301, req.query.next)` is reported; a redirect to a fixed path stays unflagged.
 - Dependencies: `uv.lock` entries whose `source` is `editable`, `virtual` or `path` (the project itself or a
   local package) are no longer counted or looked up on PyPI.
+- Dependencies: `Gemfile.lock` gems from `GIT` and `PATH` sections (a git repository or a local folder) are
+  no longer counted or looked up on RubyGems. Only gems in `GEM` sections are.
 - Secrets: `secret.url-credentials` skips a connection string whose password is an angle-bracket placeholder
   such as `mongodb+srv://<username>:<password>@host/db`, the form MongoDB Atlas shows in its docs.
 - Secrets: `secret.private-key` also finds a key written with `\n` escapes inside a string, the way a Google
