@@ -32,6 +32,7 @@
 - Secrets: new rule `secret.npm-token` (critical) for npm access tokens (`npm_` followed by 36 letters or digits).
 - Secrets: new rule `secret.mailgun-key` (critical) for Mailgun private API keys (`key-` followed by 32 lowercase hex characters).
 - Secrets: new rule `secret.telegram-bot-token` (high) for Telegram bot tokens (8 to 10 digits, a colon, then 35 letters, digits, `_` or `-`).
+- Secrets: new rule `secret.shopify-token` (critical) for Shopify access tokens (`shpat_`, `shpca_`, `shppa_` or `shpss_` followed by 32 hex characters).
 - Secrets: new rule `secret.pypi-token` (critical) for PyPI upload tokens (`pypi-AgEIcHlwaS5vcmc` followed by 50 or more characters).
 - Secrets: new rule `secret.sendgrid-key` (critical) for SendGrid API keys (`SG.`, 22 characters, a dot, then 43 characters).
 - Secrets: new rule `secret.discord-webhook` (high) for Discord webhook URLs (`discord.com/api/webhooks/` or `discordapp.com/api/webhooks/`, a 17 to 20 digit id, then a token of 60 or more characters).

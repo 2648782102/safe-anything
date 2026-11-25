@@ -32,7 +32,7 @@ Every rule safe-anything checks, generated from `safe-anything --list-rules --js
 | [`code.sql-grant-all`](https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html) | medium | [CWE-250](https://cwe.mitre.org/data/definitions/250.html) | A01:2021 Broken Access Control | A database user gets every privilege on every database. |
 | [`code.sql-plaintext-password`](https://cheatsheetseries.owasp.org/cheatsheets/Database_Security_Cheat_Sheet.html) | medium | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A database password is written in a SQL file. |
 
-## Secrets (24)
+## Secrets (25)
 
 | Rule | Severity | CWE | OWASP | What it means |
 | --- | --- | --- | --- | --- |
@@ -43,6 +43,7 @@ Every rule safe-anything checks, generated from `safe-anything --list-rules --js
 | [`secret.slack-webhook`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | high | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A Slack incoming webhook URL is written in the file. |
 | [`secret.discord-webhook`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | high | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A Discord webhook URL is written in the file. |
 | [`secret.stripe-live-key`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | critical | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A live Stripe secret key is written in the file. |
+| [`secret.shopify-token`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | critical | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A Shopify access token is written in the file. |
 | [`secret.npm-token`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | critical | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | An npm access token is written in the file. |
 | [`secret.pypi-token`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | critical | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A PyPI upload token is written in the file. |
 | [`secret.huggingface-token`](https://cheatsheetseries.owasp.org/cheatsheets/Secrets_Management_Cheat_Sheet.html) | critical | [CWE-798](https://cwe.mitre.org/data/definitions/798.html) | A07:2021 Identification and Authentication Failures | A Hugging Face access token is written in the file. |
