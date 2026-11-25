@@ -42,6 +42,9 @@
 - Secrets: new rule `secret.npm-token` (critical) for npm access tokens (`npm_` followed by 36 letters or digits).
 - Secrets: new rule `secret.mailgun-key` (critical) for Mailgun private API keys (`key-` followed by 32 lowercase hex characters).
 - Secrets: new rule `secret.telegram-bot-token` (high) for Telegram bot tokens (8 to 10 digits, a colon, then 35 letters, digits, `_` or `-`).
+- Secrets: new rule `secret.aws-secret-key` (critical) for AWS secret access keys: a 40-character value assigned to a name with `aws` and `secret` in it
+  (`aws_secret_access_key = ...`, `AWS_SECRET_ACCESS_KEY=...`, `"awsSecretAccessKey": "..."`). Values that can't be a random key are
+  skipped: the AWS docs example key, hashes, paths, words like `TestSecretKey...`, `000...` and other repeats.
 - Secrets: new rule `secret.twilio-api-key` (critical) for Twilio API keys (`SK` followed by 32 lowercase hex characters).
 - Secrets: new rule `secret.digitalocean-token` (critical) for DigitalOcean tokens (`dop_v1_`, `doo_v1_` or `dor_v1_` followed by 64 lowercase hex characters).
 - Secrets: new rule `secret.shopify-token` (critical) for Shopify access tokens (`shpat_`, `shpca_`, `shppa_` or `shpss_` followed by 32 hex characters).

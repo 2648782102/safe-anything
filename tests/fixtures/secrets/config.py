@@ -40,3 +40,17 @@ digitalocean = "{{fake:digitalocean-token}}"
 digitalocean_short = "dop_v1_0123abcd"
 twilio = "{{fake:twilio}}"
 twilio_lookalike = "SKU-12345678 SK0123abcd"
+aws_secret_access_key = "{{fake:aws-secret}}"
+aws_secret_access_key = os.environ["AWS_SECRET_ACCESS_KEY"]
+checksum = "{{fake:aws-secret}}"
+aws_secret_access_key = "{{fake:aws-secret-example}}"
+aws = {"endpoint": "https://api.example.com", "awsSecretAccessKey": "{{fake:aws-secret}}"}
+aws_secret_access_key = "{{fake:aws-secret}}" # example prod key
+flaws_secret = "{{fake:aws-secret}}"
+FLAWS_SECRET_SHA = "{{fake:aws-secret}}"
+aws_secret_path = "/prod/east1/payments/stripe/billing/keys"
+aws_secret_access_key = "0000000000000000000000000000000000000000"
+aws_secret_access_key = "TestSecretKeyTestSecretKeyTestSecretKey1"
+aws_secret_path = "/Prod/East1/Payments/Stripe/Billing/Keys"
+aws_secret_a=0000000000000000000000000000000000000000,aws_secret_key={{fake:aws-secret}}
+aws_secret_access_key = "{{fake:aws-secret}}A"
