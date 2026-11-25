@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 1.1.0 (2026-11-25)
 
 - Agent: `agent.mcp-plaintext-secret` also checks the `headers` and `http_headers` of remote MCP servers
   in JSON configs. `Authorization` and `Proxy-Authorization` always count. In `env` and headers alike, a
@@ -96,6 +96,8 @@
 - CLI: `safe-anything --help` now shows a few examples, including `safe-anything mcp`, and how to ignore a finding (`safe-anything:ignore` or `.safe-anything-ignore`).
 - Secrets: new rule `secret.google-oauth-secret` (high) for Google OAuth client secrets (`GOCSPX-` followed by 28 letters, digits, `_` or `-`).
 - Dependencies: `Pipfile.lock` is read, so Pipenv projects are checked against OSV.dev (`PyPI` ecosystem), `default` and `develop` packages alike. Entries from git, a path or an editable install are skipped.
+
+Thanks to everyone who contributed to this release: @OnurrUgur, @ghozali25, @Prashaxt, @MaxonT, @gasparoff, @sniwas, @lyn1dev, @brixtonpham, @jay23606, @tridev-tej, @pethapixels-create and @PrajsRamteke.
 
 ## 1.0.2 (2026-11-23)
 
