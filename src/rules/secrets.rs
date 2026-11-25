@@ -284,6 +284,12 @@ pub static RULES: &[Rule] = &[
         "A Google API key is written in the file."
     ),
     secret!(
+        "secret.google-oauth-secret",
+        High,
+        r"\bGOCSPX-[A-Za-z0-9_\-]{28}(?:[^A-Za-z0-9_\-]|\z)",
+        "A Google OAuth client secret is written in the file."
+    ),
+    secret!(
         "secret.mailgun-key",
         Critical,
         r"\bkey-[0-9a-f]{32}\b",

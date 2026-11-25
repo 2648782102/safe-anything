@@ -54,3 +54,7 @@ aws_secret_access_key = "TestSecretKeyTestSecretKeyTestSecretKey1"
 aws_secret_path = "/Prod/East1/Payments/Stripe/Billing/Keys"
 aws_secret_a=0000000000000000000000000000000000000000,aws_secret_key={{fake:aws-secret}}
 aws_secret_access_key = "{{fake:aws-secret}}A"
+google_oauth = "{{fake:google-oauth}}"
+google_oauth_hyphen = "{{fake:google-oauth-hyphen}}"
+google_oauth_short = "GOCSPX-short"
+google_oauth_long = "{{fake:google-oauth}}X"
