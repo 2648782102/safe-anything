@@ -8,6 +8,9 @@
   `user:${PASSWORD}` are skipped, `admin:<password>@${DB_HOST}` and `${TOKEN:-sk_live_...}` are
   reported.
 - Agent: `agent.unrestricted-shell` now reads `permissions.allow` in `.claude/settings*.json` instead of matching `"Bash"` anywhere in the file, so entries in `deny`, `ask`, or hook matchers are no longer flagged.
+- Agent: more agent files are read: `.clinerules` (a file or a folder), `.windsurf/rules/`, `.github/instructions/*.instructions.md`,
+  `.github/prompts/*.prompt.md`, `.roo/rules/` and `.kiro/steering/` for instructions, and Windsurf's `mcp_config.json`,
+  `cline_mcp_settings.json`, and Zed's `.zed/settings.json` and `.config/zed/settings.json` (`context_servers`) for MCP servers.
 - Agent: `agent.mcp-unpinned` skips the value of flags like `--python` (`uvx`, `pipx run`) and `--user`
   or `--platform` (`docker run`, `podman run`), so `uvx --python 3.12 pkg==1.0` no longer reports `3.12`
   and `docker run -u 1000:1000 acme/mcp` reports `acme/mcp`. An empty `docker run` argument is skipped.
