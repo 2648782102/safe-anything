@@ -83,6 +83,16 @@ pub fn fake(name: &str) -> String {
             "PRIVATE KEY-----\\n",
         ]
         .concat(),
+        "discord-webhook" => [
+            "https://disc",
+            "ord.com/api/webhooks/",
+            "1234567890",
+            "12345678/",
+            &body(34, MIXED),
+            "-",
+            &body(33, MIXED),
+        ]
+        .concat(),
         other => panic!("no fake value named {other}"),
     }
 }
