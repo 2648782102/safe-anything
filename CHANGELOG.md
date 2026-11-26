@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Secrets: `secret.gitlab-token` also finds GitLab deploy tokens (`gldt-` and 20 letters, digits, `_` or `-`)
+  and pipeline trigger tokens (`glptt-` and 40 lowercase hex).
 - Secrets: `secret.slack-token` also finds Slack app-level tokens (`xapp-1-A0123...-1234567890123-` and
   lowercase letters and digits), which let a Socket Mode app connect as the app. A bare `xapp-` stays quiet.
 - Secrets: `secret.env-file` and `secret.env-example-value` stay on one line instead of matching
