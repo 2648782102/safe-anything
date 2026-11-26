@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Secrets: new rule `secret.databricks-token` (critical) for Databricks personal access tokens (`dapi`
+  followed by 32 lowercase hex characters, optionally followed by `-` and one digit such as `-2`).
 - Secrets: `secret.env-file` and `secret.env-example-value` now catch values followed by an inline
   `#` comment (quoted or unquoted), leaving the comment out of the masked snippet. A `#` inside an
   unquoted value with no space before it stays part of the value, and placeholders followed by a
