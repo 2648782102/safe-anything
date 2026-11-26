@@ -17,6 +17,11 @@
 - Secrets: `secret.linear-api-key` finds Linear API keys (`lin_api_` and 40 letters and digits) and
   `secret.postman-api-key` finds Postman API keys (`PMAK-`, 24 hex, `-`, 34 hex). Both are critical.
 - Secrets: new rule `secret.pulumi-token` (critical) for Pulumi access tokens (`pul-` followed by 40 lowercase hex characters).
+- Config and agent: `remote-script` also reports `curl ... | sudo -E bash` (sudo with flags, as in NodeSource's
+  install line) and a shell run on a downloaded script, `bash -c "$(curl ...)"` and its backtick form. `sudo tee`
+  and a `$(curl ...)` only assigned to a variable stay quiet, as does `sudo -E tee bash` (tee runs, not bash).
+  PowerShell's `iwr`, `Invoke-WebRequest`, `irm`, `Invoke-RestMethod`, `iex` and `Invoke-Expression`, and its
+  `curl` and `wget` aliases, match in any case, so `irm https://... | iex` is reported.
 
 ## 1.1.0 (2026-11-25)
 
