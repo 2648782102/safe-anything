@@ -6,6 +6,10 @@
   `github.event.workflow_run.head_branch`, `.display_title`, `.head_commit.message` and the head commit's
   author and committer name and email pasted into a `run:` step are reported. Fields the triggering run
   can't set, like `workflow_run.id`, `.conclusion` or `.repository.name`, are not.
+- Dependencies: a lockfile over 2 MB is read again (up to 64 MB) instead of being skipped with "0 packages
+  checked". A larger one is named in the report (`lockfiles_too_large` in JSON). npm, Composer and Pipfile
+  lockfiles are also read in one pass, whatever their key order: 0.12 s instead of 4.3 s for a 3 MB
+  package-lock.json, 0.5 s for 60 MB.
 
 ## 1.1.0 (2026-11-25)
 
