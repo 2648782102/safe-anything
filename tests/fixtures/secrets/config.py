@@ -89,3 +89,8 @@ databricks_short = "dapi0123abcd"
 databricks_upper = "{{fake:databricks-upper}}"
 databricks_long = "{{fake:databricks}}a"
 databricks_prefixed = "my{{fake:databricks}}"
+
+perplexity = "{{fake:perplexity}}"
+perplexity_short = "pplx-0123456789abcdef"
+perplexity_long = "{{fake:perplexity}}a"
+perplexity_prefixed = "my{{fake:perplexity}}"
