@@ -89,3 +89,7 @@ databricks_short = "dapi0123abcd"
 databricks_upper = "{{fake:databricks-upper}}"
 databricks_long = "{{fake:databricks}}a"
 databricks_prefixed = "my{{fake:databricks}}"
+
+notion = "{{fake:notion}}"
+notion_letter_in_prefix = "{{fake:notion-letter-in-prefix}}"
+notion_short = "{{fake:notion-short}}"
