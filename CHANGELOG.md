@@ -16,6 +16,7 @@
   version and goes on after a backslash, uses a `${VAR}` or has an unknown word is still reported.
 - Secrets: `secret.linear-api-key` finds Linear API keys (`lin_api_` and 40 letters and digits) and
   `secret.postman-api-key` finds Postman API keys (`PMAK-`, 24 hex, `-`, 34 hex). Both are critical.
+- Secrets: new rule `secret.pulumi-token` (critical) for Pulumi access tokens (`pul-` followed by 40 lowercase hex characters).
 
 ## 1.1.0 (2026-11-25)
 

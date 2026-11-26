@@ -114,6 +114,8 @@ pub fn fake(name: &str) -> String {
         "postman-upper" => ["PM", "AK-", &body(24, HEX), "-", &body(34, HEX)]
             .concat()
             .to_uppercase(),
+        "pulumi-token" => ["pu", "l-", &body(40, HEX)].concat(),
+        "pulumi-upper" => ["pu", "l-", &body(40, HEX).to_uppercase()].concat(),
         other => panic!("no fake value named {other}"),
     }
 }
