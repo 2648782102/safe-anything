@@ -10,6 +10,10 @@
   checked". A larger one is named in the report (`lockfiles_too_large` in JSON). npm, Composer and Pipfile
   lockfiles are also read in one pass, whatever their key order: 0.12 s instead of 4.3 s for a 3 MB
   package-lock.json, 0.5 s for 60 MB.
+- Config: `config.weak-tls-version` reads Apache's `SSLProtocol` signs, so `all -SSLv3 -TLSv1 -TLSv1.1` is no
+  longer reported, while `all -SSLv3` (TLS 1.0 still on) and `+TLSv1.1` still are. A plain name replaces the set
+  so far, as Apache does, so `TLSv1.2 TLSv1` is reported and `TLSv1 TLSv1.2` is not. A line that names an old
+  version and goes on after a backslash, uses a `${VAR}` or has an unknown word is still reported.
 
 ## 1.1.0 (2026-11-25)
 
