@@ -341,6 +341,12 @@ pub static RULES: &[Rule] = &[
         "A Groq API key is written in the file."
     ),
     secret!(
+        "secret.perplexity-key",
+        Critical,
+        r"\bpplx-[A-Za-z0-9]{48}\b",
+        "A Perplexity API key is written in the file."
+    ),
+    secret!(
         "secret.google-api-key",
         High,
         r"\bAIza[0-9A-Za-z_\-]{35}",
