@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Secrets: new rule `secret.age-key` (critical) for age private keys (`AGE-SECRET-KEY-1` followed by
+  58 upper-case Bech32 characters), which decrypt every file encrypted to them, SOPS files included.
 - Secrets: when a line holds more than one secret or more than one finding, all secrets on that
   line are now masked in every finding on it (two tokens of one kind, tokens of different kinds, a
   token beside a `NEXT_PUBLIC_` or `VITE_` secret, another rule's finding on the same line such as
