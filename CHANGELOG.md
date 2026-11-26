@@ -32,6 +32,10 @@
   `curl` and `wget` aliases, match in any case, so `irm https://... | iex` is reported.
 - Build: the pinned `cookie` (0.18.3) and `time` (0.3.47) crates are updated for RUSTSEC-2026-0594 and
   RUSTSEC-2026-0009. Neither was reachable from a scan.
+- Secrets: four new critical rules. `secret.sentry-token` finds Sentry user auth tokens (`sntryu_` and 64
+  lowercase hex), `secret.supabase-token` Supabase access tokens (`sbp_` and 40 lowercase hex),
+  `secret.grafana-token` Grafana service account tokens (`glsa_`, 32 letters or digits, `_`, 8 hex) and
+  `secret.doppler-token` Doppler personal tokens (`dp.pt.` and 43 letters or digits).
 
 ## 1.1.0 (2026-11-25)
 
