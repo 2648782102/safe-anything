@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Secrets: `secret.slack-token` also finds Slack app-level tokens (`xapp-1-A0123...-1234567890123-` and
+  lowercase letters and digits), which let a Socket Mode app connect as the app. A bare `xapp-` stays quiet.
 - Secrets: `secret.env-file` and `secret.env-example-value` stay on one line instead of matching
   across line breaks, so an empty assignment like `API_KEY=` followed by another variable is no
   longer reported, a blank line above a placeholder like `your-placeholder-key-here` no longer
